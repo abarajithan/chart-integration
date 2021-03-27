@@ -12,7 +12,7 @@ function App() {
     const [dateError, setDateError] = useState(false);
 
     const getData = async () => {
-        if(new Date(fromDate).getTime() <new Date(toDate).getTime()){
+        if(new Date(fromDate).getTime() <= new Date(toDate).getTime()){
             let result = await API.getChartData({page,pageSize,fromDate,toDate});
             setDateError(false);
             setData(result);
