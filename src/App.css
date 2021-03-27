@@ -8,3 +8,7 @@
 .m-10{
   margin: 10px;
 }
+
+.chart-container{
+  height: 500px;
+}

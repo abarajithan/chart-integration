@@ -8,20 +8,23 @@ import {queryContext} from './context';
 function App() {
 
     const {page,pageSize,fromDate,toDate} = useContext(queryContext);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
 
     const getData = async () => {
         let result = await API.getChartData({page,pageSize,fromDate,toDate});
         setData(result);
     }
-    
+
     return (
        <React.Fragment>
             <div className="App">
                 React Chart - API Integration
             </div>
             <QueryBuilder getData={getData} />
-            <Chart data={data} />
+            {
+                Object.keys(data).length > 0 &&
+                <Chart data={data} />
+            }
         </React.Fragment>
     );
 }
