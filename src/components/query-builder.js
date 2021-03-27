@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import {queryContext} from '../context';
+import Utils from '../utils';
 
 const QueryBuilder = (props) => {
 
+    let minDate = new Date(new Date().getTime() - (30 * 24* 60 * 60 * 1000)) // currentDate - 30days
     const {
         page,
         setPage,
@@ -37,19 +39,27 @@ const QueryBuilder = (props) => {
                     <div className="col-md-3">
                         <div className="form-group">
                             <label >From Date</label>
-                            <input type="date" className="form-control" value={fromDate} onChange={(e)=>setFromDate(e.target.value)} />
+                            <input type="date" min={Utils.formatDate(minDate)} max={Utils.formatDate(new Date())} className="form-control" value={fromDate} onChange={(e)=>setFromDate(e.target.value)} />
                         </div>
                     </div>
                     <div className="col-md-3">
                         <div className="form-group">
                         <label >To Date</label>
-                        <input type="date" className="form-control" value={toDate} onChange={(e)=>setToDate(e.target.value)} />
+                        <input type="date" className="form-control" min={Utils.formatDate(minDate)} max={Utils.formatDate(new Date())} value={toDate} onChange={(e)=>setToDate(e.target.value)} />
                         </div>
                     </div>
                     <div className="col-md-3">
                         <button type="button" onClick={props.getData} className="btn btn-primary mr-2">Run Query</button>
                         <button type="button" onClick={resetQueries} className="btn btn-secondary">Reset</button>
                     </div>
+                    <div className="col-md-3"/>
+                    {
+                        props.dateError &&
+                        <div className="col-md-6">
+                            <span class="badge badge-pill badge-danger">From Date &gt; To Date</span>
+                        </div>
+                    }
+                   
                 </div>
             </div>
         </div>
