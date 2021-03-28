@@ -56,7 +56,7 @@ const QueryBuilder = (props) => {
                     {
                         props.dateError &&
                         <div className="col-md-6">
-                            <span class="badge badge-pill badge-danger">From Date &gt; To Date</span>
+                            <span className="badge badge-pill badge-danger">From Date &gt; To Date</span>
                         </div>
                     }
                    

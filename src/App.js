@@ -1,39 +1,40 @@
 import './App.css';
-import QueryBuilder from './components/query-builder';
-import Chart from './components/chart';
-import API from './apis/chart-info';
-import React, { useContext, useState } from 'react';
-import {queryContext} from './context';
-
-function App() {
-
-    const {page,pageSize,fromDate,toDate} = useContext(queryContext);
-    const [data, setData] = useState({});
-    const [dateError, setDateError] = useState(false);
-
-    const getData = async () => {
-        if(new Date(fromDate).getTime() <= new Date(toDate).getTime()){
-            let result = await API.getChartData({page,pageSize,fromDate,toDate});
-            setDateError(false);
-            setData(result);
-        }
-        else{
-            setDateError(true);
-        }
-    }
-
-    return (
-       <React.Fragment>
+import ChartApp from './components/chart-app';
+import Clipboard from './components/clipboard';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
+  
+const App = () => {
+        return (
+        <Router>
+            <div>
             <div className="App">
                 React Chart - API Integration
             </div>
-            <QueryBuilder dateError={dateError} getData={getData} />
-            {
-                Object.keys(data).length > 0 &&
-                <Chart data={data} />
-            }
-        </React.Fragment>
-    );
-}
+            <ul className=" m-2 nav nav-pills">
+                <li className="nav-item">
+                    <Link className="nav-link active" to="/">Chart App</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/copyToClipBoard?q=ABC">Copy Clipboard</Link>
+                </li>
+               
+            </ul>
+            <Switch>
+                <Route exact path="/">
+                    <ChartApp />
+                </Route>
+                <Route path="/copyToClipBoard">
+                    <Clipboard />
+                </Route>
+            </Switch>
+            </div>
+        </Router>
+        );
+    }
 
 export default App;
