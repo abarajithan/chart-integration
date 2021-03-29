@@ -14,7 +14,7 @@ const Clipboard = () => {
         let qValue = url.searchParams.get('q');
         if(qValue)
             setQueryInput(qValue)
-    })
+    },[])
 
     return(
         <div className="card-body">
@@ -24,7 +24,7 @@ const Clipboard = () => {
                         <label >Query Value</label>
                         <input ref={ref} type="text" className="form-control" defaultValue={queryInput} />
                     </div>
-                    <button type="button" onClick={copy} className="btn btn-dark btn-sm">Copy</button>
+                    <button type="button" onClick={copy} title="Copy to clipboard" className="btn btn-dark btn-sm">Copy</button>
                 </div>
             </div>
         </div>

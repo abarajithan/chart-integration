@@ -33,7 +33,7 @@ const Chart = (props) => {
         else{
             setShowToast(true);
         }
-    },[props])
+    },[setRandomColors, props, randomColors])
     return(
         <React.Fragment>
         {
