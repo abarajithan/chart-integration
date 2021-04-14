@@ -17,6 +17,8 @@ const QueryBuilder = (props) => {
         resetQueries
       } = useContext(queryContext);
 
+    const setQuery = (setter) => (event) => setter(event.target.value);
+
     return (
         <React.Fragment>
         <div className="card m-10">
@@ -26,26 +28,26 @@ const QueryBuilder = (props) => {
                     <div className="col-md-3">
                         <div className="form-group">
                             <label >Page</label>
-                            <input type="number" min={1} max={10} className="form-control" value={page} onChange={(e)=>setPage(e.target.value)} />
+                            <input type="number" min={1} max={10} className="form-control" value={page} onChange={setQuery(setPage)} />
                         </div>
                     </div>
                     <div className="col-md-3">
                         <div className="form-group">
                             <label >Page Size</label>
-                            <input type="number" min={5} max={25} className="form-control" value={pageSize} onChange={(e)=>setPageSize(e.target.value)} />
+                            <input type="number" min={5} max={25} className="form-control" value={pageSize} onChange={setQuery(setPageSize)} />
                         </div>
                     </div>
 
                     <div className="col-md-3">
                         <div className="form-group">
                             <label >From Date</label>
-                            <input type="date" min={Utils.formatDate(minDate)} max={Utils.formatDate(new Date())} className="form-control" value={fromDate} onChange={(e)=>setFromDate(e.target.value)} />
+                            <input type="date" min={Utils.formatDate(minDate)} max={Utils.formatDate(new Date())} className="form-control" value={fromDate} onChange={setQuery(setFromDate)} />
                         </div>
                     </div>
                     <div className="col-md-3">
                         <div className="form-group">
                         <label >To Date</label>
-                        <input type="date" className="form-control" min={Utils.formatDate(minDate)} max={Utils.formatDate(new Date())} value={toDate} onChange={(e)=>setToDate(e.target.value)} />
+                        <input type="date" className="form-control" min={Utils.formatDate(minDate)} max={Utils.formatDate(new Date())} value={toDate} onChange={setQuery(setToDate)} />
                         </div>
                     </div>
                     <div className="col-md-3">
